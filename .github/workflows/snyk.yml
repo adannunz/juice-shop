@@ -30,10 +30,5 @@ jobs:
         env:
           SNYK_TOKEN: 570ef4a5-1490-4719-a798-2723b2e64390
         run: |
-          snyk test
+          snyk code test
 
-      - name: Monitor project in Snyk
-        env:
-          SNYK_TOKEN: 570ef4a5-1490-4719-a798-2723b2e64390
-        run: |
-          snyk monitor
