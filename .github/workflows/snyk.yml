@@ -1,0 +1,42 @@
+name: Snyk Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  snyk-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Snyk CLI
+        run: |
+          npm install -g snyk
+
+      - name: Authenticate Snyk CLI
+        env:
+          SNYK_TOKEN: 570ef4a5-1490-4719-a798-2723b2e64390
+        run: |
+          snyk auth $SNYK_TOKEN
+
+      - name: Run Snyk Test
+        env:
+          SNYK_TOKEN: 570ef4a5-1490-4719-a798-2723b2e64390
+        run: |
+          snyk test
+
+      - name: Monitor project in Snyk
+        env:
+          SNYK_TOKEN: 570ef4a5-1490-4719-a798-2723b2e64390
+        run: |
+          snyk monitor
